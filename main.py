@@ -26,7 +26,8 @@ if __name__ == '__main__':
     coords_hot = np.column_stack(np.where(hot_pixels > 0))
 
     print(f"ホットピクセルの数: {len(coords_hot)}")
-    # print(coords_hot)
+    cv2.putText(img, f"num of pix: {len(coords_hot)}", (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 2.5, (0.0, 0.0, 1.0), 2,
+                cv2.LINE_AA)
     for (x, y, v) in coords_hot:
         print(f"x:{y}, y:{x}")
         cv2.circle(img, (y, x), 50, (0, 0, 1.0), 5)
