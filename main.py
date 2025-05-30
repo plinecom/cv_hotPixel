@@ -26,18 +26,19 @@ if __name__ == '__main__':
     coords_hot = np.column_stack(np.where(hot_pixels > 0))
 
     print(f"ホットピクセルの数: {len(coords_hot)}")
-    print(coords_hot)
+    # print(coords_hot)
     for (x, y, v) in coords_hot:
-        print(x, y, v)
-        cv2.circle(img, (y, x), 50, (0, 0, 1.0), 1)
-    cv2.circle(img, (0, 0), 50, (0, 0, 1.0), 1)
+        print(f"x:{y}, y:{x}")
+        cv2.circle(img, (y, x), 50, (0, 0, 1.0), 5)
 
     # 結果を表示
+    '''
     cv2.imshow("Hot Pixels", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    '''
     img_uint8 = (img * 255).astype(np.uint8)
     cv2.imwrite('output.jpg', img_uint8)
-    print_hi('PyCharm')
+#    print_hi('PyCharm')
 
 # PyCharm のヘルプは https://www.jetbrains.com/help/pycharm/ を参照してください
