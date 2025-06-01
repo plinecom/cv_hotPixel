@@ -35,6 +35,7 @@ if __name__ == '__main__':
         os.makedirs(output_folder, exist_ok=True)
         output_path = os.path.join(output_folder, os.path.splitext(os.path.basename(path))[0] + '.jpg')
         image_files.append(output_path)
+
         # 画像を読み込み、グレースケールに変換
         img = cv2.imread(path, cv2.IMREAD_GRAYSCALE|cv2.IMREAD_UNCHANGED)
 
@@ -57,7 +58,6 @@ if __name__ == '__main__':
         for (y, x, v) in coords_hot:
             print(f"x:{x}, y:{y}")
             cv2.circle(img, (x, y), 50, (0, 0, 1.0), 5)
-
 
         img_uint8 = (img * 255).astype(np.uint8)
         cv2.imwrite(output_path, img_uint8)
