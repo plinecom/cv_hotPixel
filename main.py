@@ -55,7 +55,7 @@ if __name__ == '__main__':
                     cv2.LINE_AA)
         cv2.putText(img, f"num of pix: {len(coords_hot)}", (50, 180), cv2.FONT_HERSHEY_SIMPLEX, 2.5, (0.0, 0.0, 1.0), 2,
                     cv2.LINE_AA)
-        for (y, x, v) in coords_hot:
+        for (y, x, _) in coords_hot:
             print(f"x:{x}, y:{y}")
             cv2.circle(img, (x, y), 50, (0, 0, 1.0), 5)
 
