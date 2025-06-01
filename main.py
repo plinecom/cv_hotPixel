@@ -12,7 +12,6 @@ import numpy as np
 # ガター内の緑色のボタンを押すとスクリプトを実行します。
 if __name__ == '__main__':
 
-
     image_files = []
     for path in glob.glob('hotpixel/*.exr'):
         output_folder = os.path.join(os.path.dirname(path), 'check')
@@ -38,16 +37,11 @@ if __name__ == '__main__':
                     cv2.LINE_AA)
         cv2.putText(img, f"num of pix: {len(coords_hot)}", (50, 180), cv2.FONT_HERSHEY_SIMPLEX, 2.5, (0.0, 0.0, 1.0), 2,
                     cv2.LINE_AA)
-        for (x, y, v) in coords_hot:
-            print(f"x:{y}, y:{x}")
-            cv2.circle(img, (y, x), 50, (0, 0, 1.0), 5)
+        for (y, x, v) in coords_hot:
+            print(f"x:{x}, y:{y}")
+            cv2.circle(img, (x, y), 50, (0, 0, 1.0), 5)
 
-        # 結果を表示
-        '''
-        cv2.imshow("Hot Pixels", img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        '''
+
         img_uint8 = (img * 255).astype(np.uint8)
         cv2.imwrite(output_path, img_uint8)
     #    print_hi('PyCharm')
