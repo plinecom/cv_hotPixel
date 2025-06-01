@@ -1,15 +1,9 @@
-# これはサンプルの Python スクリプトです。
-
-def print_hi(name):
-    # スクリプトをデバッグするには以下のコード行でブレークポイントを使用してください。
-    print(f'Hi, {name}')  # Ctrl+F8を押すとブレークポイントを切り替えます。
 import glob
 import os
 os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "1"
 import cv2
 import numpy as np
 
-# ガター内の緑色のボタンを押すとスクリプトを実行します。
 if __name__ == '__main__':
 
     image_files = []
@@ -44,7 +38,6 @@ if __name__ == '__main__':
 
         img_uint8 = (img * 255).astype(np.uint8)
         cv2.imwrite(output_path, img_uint8)
-    #    print_hi('PyCharm')
 
     # 最初の画像からフレームサイズを取得
     frame = cv2.imread(image_files[0])
@@ -67,4 +60,3 @@ if __name__ == '__main__':
 
     video_writer.release()
     print(f'動画ファイル {output_file} を作成しました。')
-    # PyCharm のヘルプは https://www.jetbrains.com/help/pycharm/ を参照してください
