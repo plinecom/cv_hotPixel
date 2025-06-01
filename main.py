@@ -4,9 +4,32 @@ os.environ["OPENCV_IO_ENABLE_OPENEXR"] = "1"
 import cv2
 import numpy as np
 
+
+def create_video(output_folder, image_files):
+    """画像ファイルから動画を作成"""
+    frame = cv2.imread(image_files[0])
+    height, width, layers = frame.shape
+    frame_size = (width, height)
+    fps = 24
+
+    # 動画ファイルの出力先
+    output_file = 'output.mov'
+
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    video_writer = cv2.VideoWriter(os.path.join(output_folder,output_file), fourcc, fps, frame_size)
+
+    for image_file in image_files:
+        frame = cv2.imread(image_file)
+        video_writer.write(frame)
+
+    video_writer.release()
+    print(f'動画ファイル {output_file} を作成しました。')
+
+
 if __name__ == '__main__':
 
     image_files = []
+    output_folder = ''
     for path in glob.glob('hotpixel/*.exr'):
         output_folder = os.path.join(os.path.dirname(path), 'check')
         os.makedirs(output_folder, exist_ok=True)
@@ -39,24 +62,4 @@ if __name__ == '__main__':
         img_uint8 = (img * 255).astype(np.uint8)
         cv2.imwrite(output_path, img_uint8)
 
-    # 最初の画像からフレームサイズを取得
-    frame = cv2.imread(image_files[0])
-    height, width, layers = frame.shape
-    frame_size = (width, height)
-
-    # 動画ファイルの出力先
-    output_file = 'output.mov'
-
-    # 動画ライターの設定（QuickTime形式）
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # 'mp4v'は.mov形式にも対応
-    fps = 24  # フレームレート（適宜変更）
-
-    video_writer = cv2.VideoWriter(output_file, fourcc, fps, frame_size)
-
-    # 画像を順に読み込んで動画に書き込む
-    for image_file in image_files:
-        frame = cv2.imread(image_file)
-        video_writer.write(frame)
-
-    video_writer.release()
-    print(f'動画ファイル {output_file} を作成しました。')
+    create_video(output_folder,image_files)
